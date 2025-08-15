@@ -10,17 +10,18 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import type { ContactProp } from "@/types";
 import type React from "react";
 import { useState } from "react";
 
 export function AddDialog() {
-    const [name, setName] = useState<String>()
-    const [phone, setPhone] = useState<String>()
-    const [desc, setDesc] = useState<String>()
+    const [name, setName] = useState<string>("")
+    const [phone, setPhone] = useState<string>("")
+    const [desc, setDesc] = useState<string>("")
 
   const handleSubmit = (e: React.FormEvent) => {
     // e.preventDefault()
-    const data = {
+    const data: ContactProp = {
         id: (Math.random()*100).toString(),
         name: name,
         phone: phone,
