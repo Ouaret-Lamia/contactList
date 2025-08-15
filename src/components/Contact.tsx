@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 import { X } from "lucide-react";
 
 // To do: Dinamic content
-const Contact = ({ id, name, phone, description }: ContactProp) => {
+const Contact = ({ id, pfp, name, phone, description }: ContactProp) => {
   const handleDelete = () => {
     localStorage.removeItem(`contact${id}`);
     window.location.reload();
@@ -12,14 +12,13 @@ const Contact = ({ id, name, phone, description }: ContactProp) => {
   return (
     <div className="relative bg-primary/2 border border-primary/15 rounded-2xl p-5 shadow-sm">
       <div className=" flex justify-center items-start pb-3 border-b border-sidebar-border">
-        <br />
         <img
-          src="/pfp1.jpg"
+          src={pfp ? pfp : "/pfp.jpg"}
           alt="pfp"
-          className="w-[25%] rounded-full object-center shadow-sm"
+          className="w-15 h-15 rounded-full object-center object-cover shadow-sm"
         />
       </div>
-      
+
       <Button
         variant={"link"}
         className="absolute top-1 right-1 text-black hover:text-red-500"

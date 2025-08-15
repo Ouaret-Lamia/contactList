@@ -1,13 +1,13 @@
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import type { ContactProp } from "@/types";
@@ -15,20 +15,31 @@ import type React from "react";
 import { useState } from "react";
 
 export function AddDialog() {
-    const [name, setName] = useState<string>("")
-    const [phone, setPhone] = useState<string>("")
-    const [desc, setDesc] = useState<string>("")
+  const [name, setName] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
+  const [desc, setDesc] = useState<string>("");
+  const [pfp, setPfp] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    // e.preventDefault()
+  const handlePfpChange = (file: File) => {
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      if (typeof reader.result === "string") {
+        setPfp(reader.result);
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+  const handleSubmit = () => {
     const data: ContactProp = {
-        id: (Math.random()*100).toString(),
-        name: name,
-        phone: phone,
-        description: desc,
-    }
-    
-    localStorage.setItem(`contact${data.id}`, JSON.stringify(data))
+      id: (Math.random() * 100).toString(),
+      pfp: pfp,
+      name: name,
+      phone: phone,
+      description: desc,
+    };
+
+    localStorage.setItem(`contact${data.id}`, JSON.stringify(data));
   };
 
   return (
@@ -46,17 +57,41 @@ export function AddDialog() {
             </DialogDescription>
           </DialogHeader>
 
-          <form onSubmit={(e) => handleSubmit(e)}>
+          <form onSubmit={() => handleSubmit()}>
             <div className="grid gap-4">
               <div className="grid gap-2">
                 <label htmlFor="name-1" className="text-sm font-semibold">
-                  Name
+                  Profile picture
                 </label>
-                <Input id="name-1" name="name" placeholder="Name" required onChange={(e) => setName(e.target.value)} />
+                <input
+                  id="pfp-1"
+                  name="pfp"
+                  type="file"
+                  accept=".png, .jpg, .jpeg"
+                  className={buttonVariants({ variant: "outline" })}
+                  required
+                  onChange={(e) => {
+                    if (e.target.files && e.target.files[0]) {
+                      handlePfpChange(e.target.files[0]);
+                    }
+                  }}
+                />
+              </div>
+              <div className="grid gap-2">
+                <label htmlFor="name-1" className="text-sm font-semibold">
+                  Name <span className="text-red-600">*</span>
+                </label>
+                <Input
+                  id="name-1"
+                  name="name"
+                  placeholder="Name"
+                  required
+                  onChange={(e) => setName(e.target.value)}
+                />
               </div>
               <div className="grid gap-2">
                 <label htmlFor="phone" className="text-sm font-semibold">
-                  Phone Number
+                  Phone Number <span className="text-red-600">*</span>
                 </label>
                 <Input
                   id="phone"

@@ -43,6 +43,7 @@ const ContactList = () => {
             <div key={contact.id}>
               <Contact
                 id={contact.id}
+                pfp={contact.pfp}
                 name={contact.name}
                 phone={contact.phone}
                 description={contact.description}
