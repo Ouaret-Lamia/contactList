@@ -1,8 +1,8 @@
+import type { ContactProp } from "@/types";
+import { ArrowUpDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import Contact from "./Contact";
-import type { ContactProp } from "@/types";
 import { Button } from "./ui/button";
-import { ArrowUpDown } from "lucide-react";
 
 const ContactList = () => {
   const [contactList, setContactList] = useState<ContactProp[]>([]);
@@ -32,7 +32,14 @@ const ContactList = () => {
       </h4>
 
       <div className="flex justify-end py-0 px-3">
-        <Button variant={"secondary"} onClick={() => setContactList([...contactList].sort((a, b) => a.name.localeCompare(b.name)))}>
+        <Button
+          variant={"secondary"}
+          onClick={() =>
+            setContactList(
+              [...contactList].sort((a, b) => a.name.localeCompare(b.name))
+            )
+          }
+        >
           <ArrowUpDown /> Sort
         </Button>
       </div>

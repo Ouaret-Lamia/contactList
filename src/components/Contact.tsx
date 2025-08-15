@@ -1,8 +1,7 @@
 import type { ContactProp } from "@/types";
-import { Button } from "./ui/button";
 import { X } from "lucide-react";
+import { Button } from "./ui/button";
 
-// To do: Dinamic content
 const Contact = ({ id, pfp, name, phone, description }: ContactProp) => {
   const handleDelete = () => {
     localStorage.removeItem(`contact${id}`);

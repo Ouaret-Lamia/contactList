@@ -1,23 +1,22 @@
 import { useEffect, useState } from "react";
 import { AddDialog } from "./AddDialog";
 
-// To do: make the data dynamic
 const Stats = () => {
-  const [contactCount, setContactCount] = useState(0)
-  
+  const [contactCount, setContactCount] = useState(0);
+
   useEffect(() => {
-    let count = 0
+    let count = 0;
 
-    for (let i=0; i < localStorage.length; i++){
-      const key = localStorage.key(i)
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
 
-      if(key && key.startsWith("contact")) {
-        count ++
+      if (key && key.startsWith("contact")) {
+        count++;
       }
     }
 
-    setContactCount(count)
-  }, [localStorage.length])
+    setContactCount(count);
+  }, [localStorage.length]);
 
   return (
     <div className="md:h-[89vh] w-full px-8 py-5 md:border-l border-sidebar-border">

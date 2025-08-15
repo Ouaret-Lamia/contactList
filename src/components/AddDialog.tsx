@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import type { ContactProp } from "@/types";
-import type React from "react";
 import { useState } from "react";
 
 export function AddDialog() {
@@ -69,7 +68,6 @@ export function AddDialog() {
                   type="file"
                   accept=".png, .jpg, .jpeg"
                   className={buttonVariants({ variant: "outline" })}
-                  required
                   onChange={(e) => {
                     if (e.target.files && e.target.files[0]) {
                       handlePfpChange(e.target.files[0]);
